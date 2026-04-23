@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pandemic Finance — 2020–2022 팬데믹이 금융시장에 남긴 8개 사건</title>
+  <meta name="description" content="COVID-19 대폭락부터 FTX 파산까지. 37개월의 금융 드라마를 스크롤로 읽는다." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200;0,8..60,300;0,8..60,400;1,8..60,200;1,8..60,300&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+  <link rel="stylesheet" href="styles.css?v=9" />
+</head>
+<body>
+
+  <!-- MASTHEAD — glass & floating -->
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="#/">
+        <span class="brand-mark">PF</span>
+        <span>Pandemic Finance</span>
+      </a>
+      <nav class="masthead-nav" aria-label="주 네비게이션">
+        <a href="#timeline">타임라인</a>
+        <a href="#events">사건</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="masthead-actions">
+        <button class="mode-toggle" id="mode-toggle" type="button" aria-label="다크/라이트 모드 전환" title="다크/라이트 모드 전환">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a class="btn btn--black" href="#events">전체 사건 보기</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- INDEX VIEW -->
+  <main id="index-view">
+
+    <section class="hero container">
+      <span class="hero-eyebrow">
+        <span class="dot"></span>
+        Data journalism · 2020—2023
+      </span>
+      <h1 class="hero-title" style="font-size: 80px">
+        팬데믹에 의한 금융시장의<br>
+        변동성과 구조적 변화
+      </h1>
+      <p class="hero-deck">
+        2020년 3월의 펜데믹의 시작부터 비상사태의 종료까지
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn--warm" href="#/event/e01">
+          <span>첫 번째 사건부터 읽기</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <dl class="hero-meta">
+        <div><dt>Period</dt><dd>2020.01 — 2023.05</dd></div>
+        <div><dt>Events</dt><dd>6 (+ 2 사이드)</dd></div>
+        <div><dt>Sources</dt><dd>FRED · Yahoo · BIS</dd></div>
+        <div><dt>Format</dt><dd>Scrollytelling · 8 × 7 frames</dd></div>
+      </dl>
+    </section>
+
+    <section class="timeline-section container" id="timeline">
+      <div class="timeline-legend">
+        <h2>The shock clock.</h2>
+        <span class="years">Jan 2020 ——— May 2023</span>
+      </div>
+      <div class="timeline" id="timeline-viz">
+        <div class="timeline-track" aria-label="이벤트 타임라인"></div>
+        <div class="timeline-cards"></div>
+      </div>
+    </section>
+
+    <section class="events-section" id="events">
+      <div class="container">
+        <div class="section-head">
+          <h2>37개월의 드라마</h2>
+        </div>
+        <div class="events-grid" id="events-grid"></div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <h2>About this project.</h2>
+            <div class="about-colophon">Colophon · Methodology</div>
+          </div>
+          <div class="about-body">
+            <p>
+              2020년 1월부터 2023년 5월까지의 거시·자산 가격 데이터를 스토리
+              단위로 재구성한 데이터 저널리즘 실험. 각 사건은 Prologue — Act 1–5
+              — Summary의 7프레임 구조를 가지며, 독립적으로 읽을 수 있도록
+              설계되었다.
+            </p>
+            <p>
+              차트는 Python matplotlib으로 프리렌더링된 PNG를 사용하며, 본문은
+              한국어 신문 기사 톤(평서체)을 따른다. 수치와 고유명사는 본문에
+              적어도 한 번 노출해 독자의 기억을 돕는다.
+            </p>
+            <dl class="about-sources">
+              <div><dt>Macro</dt><dd>FRED · BLS · BEA</dd></div>
+              <div><dt>Market</dt><dd>Yahoo Finance · LSEG</dd></div>
+              <div><dt>Crypto</dt><dd>CoinGecko · Glassnode</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <main id="event-view" style="display:none;"></main>
+
+  <footer class="site-foot">
+    <div class="site-foot-inner">
+      <span>© 2026 · Pandemic Finance</span>
+      <span>Editorial data journalism · 37 months · 8 events</span>
+      <span>v0.1 — scaffold</span>
+    </div>
+  </footer>
+
+  <aside class="tweaks-panel" aria-label="Tweaks">
+    <div class="tweaks-title">Tweaks</div>
+    <div class="tweak-group">
+      <div class="tweak-label">Mode</div>
+      <div class="tweak-options">
+        <button data-tweak="mode" data-val="light">Light</button>
+        <button data-tweak="mode" data-val="dark">Dark</button>
+      </div>
+    </div>
+    <div class="tweak-group">
+      <div class="tweak-label">Accent palette</div>
+      <div class="tweak-options">
+        <button data-tweak="palette" data-val="editorial">Classic</button>
+        <button data-tweak="palette" data-val="ft">FT</button>
+        <button data-tweak="palette" data-val="terminal">Term.</button>
+        <button data-tweak="palette" data-val="muted">Muted</button>
+      </div>
+    </div>
+    <div class="tweak-group">
+      <div class="tweak-label">Scrolly transition</div>
+      <div class="tweak-options">
+        <button data-tweak="transition" data-val="fade">Fade</button>
+        <button data-tweak="transition" data-val="slide">Slide</button>
+        <button data-tweak="transition" data-val="parallax">Parallax</button>
+      </div>
+    </div>
+  </aside>
+
+  <script src="data/events.js?v=9"></script>
+  <script src="data/comics.js?v=9"></script>
+  <script src="app.js?v=9"></script>
+</body>
+</html>

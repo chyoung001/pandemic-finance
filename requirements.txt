@@ -1,0 +1,17 @@
+# 데이터 수집
+pandas==2.2.3
+numpy==2.0.2
+requests==2.32.3
+yfinance==0.2.50
+
+# 시각화
+matplotlib==3.9.2
+seaborn==0.13.2
+
+# 노트북
+jupyter==1.1.1
+ipykernel==6.29.5
+
+# 파일 처리
+openpyxl==3.1.5
+python-dateutil==2.9.0

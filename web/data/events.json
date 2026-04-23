@@ -1,0 +1,26 @@
+{
+  "_comment": "See events.js for the full data with Korean narrative. This JSON is auto-derivable; kept as a scaffolding placeholder per prompt spec.",
+  "schema": {
+    "id": "string",
+    "number": "string",
+    "date": "string",
+    "title": "string",
+    "subtitle": "string",
+    "keyFigure": "string",
+    "keyLabel": "string",
+    "folder": "string (data/figures/<folder>/)",
+    "accentColor": "hex",
+    "phases": [
+      {
+        "id": "string",
+        "frame": "string (matches .png filename without extension)",
+        "title": "string",
+        "narrative": ["paragraph", "paragraph"]
+      }
+    ],
+    "summary": { "frame": "99_summary", "text": "string" }
+  },
+  "events": [
+    "See events.js — single source of truth"
+  ]
+}
