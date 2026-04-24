@@ -436,7 +436,7 @@
       if (i === 0) layer.classList.add('is-visible');
       layer.dataset.frame = p.frame;
       layer.innerHTML = `
-        <img src="../data/figures/${e.folder}/${p.frame}.png" alt="${e.title} — ${p.title || p.frame}"
+        <img src="data/figures/${e.folder}/${p.frame}.png" alt="${e.title} — ${p.title || p.frame}"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="frame-placeholder" style="display:none;">
           <span class="frame-id">Frame ${String(i).padStart(2, '0')}</span>
