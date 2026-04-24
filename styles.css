@@ -1148,12 +1148,13 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.6s ease, transform 0.8s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.frame-layer.is-visible { opacity: 1; }
+.frame-layer.is-visible { opacity: 1; pointer-events: auto; }
 
 [data-transition="slide"] .frame-layer { transform: translateY(20px); }
 [data-transition="slide"] .frame-layer.is-visible { transform: translateY(0); }
@@ -1868,4 +1869,70 @@ p { text-wrap: pretty; }
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   opacity: 0.8;
+}
+
+/* ==========================================================================
+   Lightbox — `img.zoomable` 클릭 시 확대
+   ========================================================================== */
+.zoomable { cursor: zoom-in; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 18, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 48px;
+  cursor: zoom-out;
+  animation: lightbox-fade 0.18s ease;
+}
+.lightbox.is-open { display: flex; }
+
+.lightbox-img {
+  max-width: 85vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
+  background: #fff;
+  border-radius: 4px;
+  animation: lightbox-pop 0.22s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+@keyframes lightbox-pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  z-index: 1;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.24); }
+
+@keyframes lightbox-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .lightbox { padding: 16px; }
+  .lightbox-close { top: 12px; right: 12px; }
 }

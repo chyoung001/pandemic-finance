@@ -415,7 +415,7 @@
     // summary.image 가 있으면 이미지로, 없으면 기존 텍스트 문단으로 렌더
     const summaryBody = e.summary.image
       ? `<figure class="summary-image">
-           <img src="${e.summary.image}" alt="${e.summary.imageAlt || e.title + ' 요약'}"
+           <img class="zoomable" src="${e.summary.image}" alt="${e.summary.imageAlt || e.title + ' 요약'}"
                 loading="lazy"
                 onerror="this.closest('figure').classList.add('is-missing');" />
          </figure>`
@@ -436,7 +436,7 @@
       if (i === 0) layer.classList.add('is-visible');
       layer.dataset.frame = p.frame;
       layer.innerHTML = `
-        <img src="data/figures/${e.folder}/${p.frame}.png" alt="${e.title} — ${p.title || p.frame}"
+        <img class="zoomable" src="data/figures/${e.folder}/${p.frame}.png" alt="${e.title} — ${p.title || p.frame}"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="frame-placeholder" style="display:none;">
           <span class="frame-id">Frame ${String(i).padStart(2, '0')}</span>
@@ -564,7 +564,7 @@
       }
       el.innerHTML = `
         <figure class="comic-figure">
-          <img src="${src}" alt="${block.alt || ''}" loading="lazy"
+          <img class="zoomable" src="${src}" alt="${block.alt || ''}" loading="lazy"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
           <div class="comic-img-missing" style="display:none;">
             <span>이미지 없음</span>
@@ -780,11 +780,58 @@
   }
 
   // =========================================================================
+  // LIGHTBOX — `img.zoomable` 클릭 시 전체 화면 오버레이로 확대
+  // =========================================================================
+  function initLightbox() {
+    if (document.getElementById('lightbox')) return;
+    const box = document.createElement('div');
+    box.className = 'lightbox';
+    box.id = 'lightbox';
+    box.setAttribute('aria-hidden', 'true');
+    box.setAttribute('role', 'dialog');
+    box.innerHTML = `
+      <button class="lightbox-close" type="button" aria-label="닫기">×</button>
+      <img class="lightbox-img" alt="" />
+    `;
+    document.body.appendChild(box);
+
+    const imgEl = box.querySelector('.lightbox-img');
+    const closeBtn = box.querySelector('.lightbox-close');
+
+    function open(src, alt) {
+      imgEl.src = src;
+      imgEl.alt = alt || '';
+      box.classList.add('is-open');
+      box.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      box.classList.remove('is-open');
+      box.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', (ev) => {
+      const target = ev.target.closest('img.zoomable');
+      if (target && !box.contains(target)) {
+        ev.preventDefault();
+        open(target.currentSrc || target.src, target.alt);
+      }
+    });
+    box.addEventListener('click', close);
+    closeBtn.addEventListener('click', (ev) => { ev.stopPropagation(); close(); });
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && box.classList.contains('is-open')) close();
+    });
+  }
+
+  // =========================================================================
   // BOOT
   // =========================================================================
   document.addEventListener('DOMContentLoaded', () => {
     applyTweaks();
     setupTweaksPanel();
+    initLightbox();
     route();
     window.addEventListener('hashchange', route);
   });
